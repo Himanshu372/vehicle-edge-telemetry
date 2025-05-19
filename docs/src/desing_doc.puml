@@ -1,0 +1,21 @@
+@startuml vehicle-edge-telemetry
+== Vehicle to server ==
+entity Vehicle
+queue kafka
+entity Server
+Vehicle->kafka: CAN/Bus logs streamed through LTE/LoRA
+kafka->Server: Logs streamed to serve
+
+== server to datastore ==
+database TimeseriesDB
+Server->TimeseriesDB: Logs from queue directed/stored in timeseriesDB
+
+== datastore to ML model ==
+entity MLModel
+TimeseriesDB->MLModel: Logs become part of training dataset of ML model
+
+== serve to UI/Dashboard ==
+entity Dashboard
+Server->MLModel: New logs are passed through ML model for inference
+Server->Dashboard: RUL(Remaining Useful Life) calculated from ML model is directed to UI
+@enduml

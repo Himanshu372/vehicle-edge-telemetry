@@ -12,7 +12,7 @@ class ReadData:
             for row in f:
                 self.data.append(row)
     
-    def flust(self):
+    def flush(self):
         if len(self.data) > 0:
             self.data = []
 
