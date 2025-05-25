@@ -1,3 +1,0 @@
-
-
-KAFKA_QUEUE = ''
